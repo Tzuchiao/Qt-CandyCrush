@@ -1,10 +1,10 @@
 # This is my Candy Crush Report !!!
 
-**遊戲截圖**
+**遊戲截圖**<br><br>
+![image](https://github.com/bgrffqq/pd2-project3/blob/master/print.png)<br><br>
+**Class 架構**<br><br>
 
-**Class 架構**
-
-![image](https://github.com/bgrffqq/pd2-project3/blob/master/readpic.png)
+![image](https://github.com/bgrffqq/pd2-project3/blob/master/readpic.png)<br><br>
 
 **A. MainWindow**
 <br>
