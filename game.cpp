@@ -33,7 +33,7 @@ void game::swap(int &x , int &y)
      y = temp;
 }
 
-void game::checkLine(int row , int col)
+bool game::checkLine(int row , int col)
 {
     //check way of row
     int count = 1;
@@ -127,6 +127,13 @@ void game::checkLine(int row , int col)
     {
         Bomb(row,col);
     }
+
+    if(count <3 && colcount <3)
+    {
+        return false;
+    }
+    else
+        return true;
 }
 
 void game::rowBomb(int row , int col , int type)

@@ -8,7 +8,7 @@ public:
     game();
    static  int arr[10][10];
    void init();
-   void checkLine(int , int);
+   bool checkLine(int , int);
    void swap(int & , int &);
    void moveDown();
    void gener();

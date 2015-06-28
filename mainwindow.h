@@ -5,6 +5,8 @@
 #include <QKeyEvent>
 #include <QtWidgets>
 #include "game.h"
+#include "result.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -41,7 +43,11 @@ private:
     int swaparr[2];
     void play(int , int , int , int);
     void resetImage();
+    void checkWin();
+    bool isNear(int , int , int , int);
     int step;
+    Result *resWin;
+
 
 };
 

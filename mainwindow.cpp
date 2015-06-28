@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setlabel();
     flag = 1;
     step = 0;
+    resWin = new Result;
 }
 
 MainWindow::~MainWindow()
@@ -113,13 +114,15 @@ void MainWindow::setImage(int id , QPushButton *tempbut)
 
 void MainWindow::play(int row1, int col1 , int row2 , int col2)
 {
+    if(isNear(row1,col1,row2,col2))
+    {
     if(gobj.arr[row1][col1] != gobj.arr[row2][col2])
     {
     gobj.swap(gobj.arr[row1][col1],gobj.arr[row2][col2]);
     if(gobj.arr[row1][col1]<7 && gobj.arr[row2][col2]<7)
     {
-    gobj.checkLine(row1,col1);
-    gobj.checkLine(row2,col2);
+    if(!(gobj.checkLine(row1,col1)||gobj.checkLine(row2,col2)))
+        gobj.swap(gobj.arr[row1][col1],gobj.arr[row2][col2]);
     }
     else if (gobj.arr[row1][col1] > 6 && gobj.arr[row2][col2]<7)
     {
@@ -136,6 +139,8 @@ void MainWindow::play(int row1, int col1 , int row2 , int col2)
     step++;
     ui->lcdNumber->display(gobj.score);
     ui->lcdNumber_2->display(step);
+    checkWin();
+    }
     }
 }
 
@@ -167,4 +172,59 @@ void MainWindow::on_pushButton_2_clicked()
 {
     qDebug() << gobj.score;
     this->close();
+    resWin->setTitle(0);
+    resWin->setStarScore(0,gobj.score);
+    resWin->show();
+}
+
+void MainWindow::checkWin()
+{
+    if(step > 15)
+    {
+        this->close();
+        resWin->setTitle(0);
+        resWin->setStarScore(0,gobj.score);
+        resWin->show();
+    }
+
+    if(gobj.score > 100)
+    {
+        if(step<=5)
+        {
+            this->close();
+            resWin->setTitle(1);
+            resWin->setStarScore(3,gobj.score);
+            resWin->show();
+        }
+        if(step<=10&&step>5)
+        {
+            this->close();
+            resWin->setTitle(1);
+            resWin->setStarScore(2,gobj.score);
+            resWin->show();
+        }
+        if(step<=15&&step>10)
+        {
+            this->close();
+            resWin->setTitle(1);
+            resWin->setStarScore(1,gobj.score);
+            resWin->show();
+        }
+
+    }
+}
+
+bool MainWindow::isNear(int r1, int c1, int r2, int c2)
+{
+    if(r1==r2 && (c1 == c2+1 || c1 == c2-1))
+    {
+            return true;
+    }
+    else if(c1==c2 && (r1==r2+1 || r1== r2-1))
+    {
+            return true;
+    }
+    else
+        return false;
+
 }
